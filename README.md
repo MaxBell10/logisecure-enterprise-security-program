@@ -33,27 +33,28 @@ LOGISECURE SA — INFRASTRUCTURE
 
 INTERNET/WAN
     │
-[pfSense CE — Firewall/Router]                          P2
+[pfSense CE — Firewall/Router]              → logisecure-pfsense-segmentation
     │
     ├── [LAN IT — 192.168.1.x]
-    │       Active Directory (lab.local)                P1
-    │       Wazuh SIEM                                  P1, P8, P11, P12
-    │       PKI / KMS                                   P7
+    │       Active Directory (lab.local)    → logisecure-active-directory
+    │       Wazuh SIEM                      → logisecure-active-directory
+    │       PKI / KMS                       → logisecure-pki-kms
     │
     ├── [DMZ — 192.168.2.x]
-    │       Cowrie Honeypot                             P8
-    │       Web server (supplier-facing)                P8
+    │       Cowrie Honeypot                 → logisecure-honeypot-threat-intel
+    │       Web server (supplier-facing)    → logisecure-honeypot-threat-intel
     │
-    ├── [OT Control VLAN 20]                            P6, P13
-    │       HMI legacy (Windows 7) · Historian SCADA
+    ├── [OT Control VLAN 20]
+    │       HMI legacy (Windows 7)          → logisecure-legacy-ot-security
+    │       Historian SCADA                 → logisecure-ot-network-security
     │
-    └── [OT Field VLAN 30]                              P6
-            PLC · Sensors · Conveyors
+    └── [OT Field VLAN 30]
+            PLC · Sensors · Conveyors       → logisecure-ot-network-security
 
-[AWS Cloud — eu-west-1]                                 P10
+[AWS Cloud — eu-west-1]                     → logisecure-cloud-security
     IAM · S3 · CloudTrail · GuardDuty · Terraform
 
-[Third-party VPN]                                       P14
+[Third-party VPN]                           → logisecure-supply-chain-risk
     TechLogix · ConveyorPro · DataAPI
 ```
 
@@ -61,42 +62,42 @@ INTERNET/WAN
 
 ## Programme Overview
 
-| Part | Name | Projects |
+| Part | Name | Repositories |
 |---|---|---|
-| 0 | Hub — Enterprise Security Program | P0 |
-| 1 | Build the Lab | P1 → P5 |
-| 2 | Expand the Skills | P6 → P12 |
-| 3 | Govern the Risk | P13 → P15 |
+| Hub | Enterprise Security Program | logisecure-enterprise-security-program |
+| 1 | Build the Lab | active-directory → attack-simulation |
+| 2 | Expand the Skills | ot-network-security → redteam-blueteam |
+| 3 | Govern the Risk | legacy-ot-security → iso27001-audit |
 
 ### Part 1 — Build the Lab
 
-| # | Repository | Status | Description |
-|---|---|---|---|
-| P1 | [logisecure-active-directory](https://github.com/MaxBell10/logisecure-active-directory) | 🔄 In progress | AD hardening · GPO · Wazuh SIEM · MITRE ATT&CK |
-| P2 | [logisecure-pfsense-segmentation](https://github.com/MaxBell10/logisecure-pfsense-segmentation) | 🔄 In progress | pfSense · Suricata IDS/IPS · DMZ · OpenVAS |
-| P3 | [logisecure-ebios-rm-assessment](https://github.com/MaxBell10/logisecure-ebios-rm-assessment) | 📋 Planned | EBIOS RM 5 workshops · NIS2 · strategic scenarios |
-| P4 | [logisecure-bash-automation](https://github.com/MaxBell10/logisecure-bash-automation) | 📋 Planned | Bash & PowerShell · GPG-signed · GitHub Actions CI |
-| P5 | [logisecure-attack-simulation](https://github.com/MaxBell10/logisecure-attack-simulation) | 📋 Planned | Kill chain · password spray · Wazuh correlation |
+| Repository | Status | Description |
+|---|---|---|
+| [logisecure-active-directory](https://github.com/MaxBell10/logisecure-active-directory) | 🔄 In progress | AD hardening · GPO · Wazuh SIEM · MITRE ATT&CK |
+| [logisecure-pfsense-segmentation](https://github.com/MaxBell10/logisecure-pfsense-segmentation) | 🔄 In progress | pfSense · Suricata IDS/IPS · DMZ · OpenVAS |
+| [logisecure-ebios-rm-assessment](https://github.com/MaxBell10/logisecure-ebios-rm-assessment) | 📋 Planned | EBIOS RM 5 workshops · NIS2 · strategic scenarios |
+| [logisecure-bash-automation](https://github.com/MaxBell10/logisecure-bash-automation) | 📋 Planned | Bash & PowerShell · GPG-signed · GitHub Actions CI |
+| [logisecure-attack-simulation](https://github.com/MaxBell10/logisecure-attack-simulation) | 📋 Planned | Kill chain · password spray · Wazuh correlation |
 
 ### Part 2 — Expand the Skills
 
-| # | Repository | Status | Description |
-|---|---|---|---|
-| P6 | [logisecure-ot-network-security](https://github.com/MaxBell10/logisecure-ot-network-security) | 📋 Planned | Purdue Model · VLAN · ACL · IEC 62443 |
-| P7 | [logisecure-pki-kms](https://github.com/MaxBell10/logisecure-pki-kms) | 📋 Planned | 2-tier PKI · Root CA offline · CRL · GPG |
-| P8 | [logisecure-honeypot-threat-intel](https://github.com/MaxBell10/logisecure-honeypot-threat-intel) | 📋 Planned | Cowrie · STIX IOC export · Threat Intel |
-| P9 | [logisecure-container-security](https://github.com/MaxBell10/logisecure-container-security) | 📋 Planned | Docker hardening · Trivy · kube-bench · SBOM |
-| P10 | [logisecure-cloud-security](https://github.com/MaxBell10/logisecure-cloud-security) | 📋 Planned | AWS · Terraform IaC · GuardDuty · CloudTrail |
-| P11 | [logisecure-forensics-ir](https://github.com/MaxBell10/logisecure-forensics-ir) | 📋 Planned | PICERL · TheHive · memory & disk forensics |
-| P12 | [logisecure-redteam-blueteam](https://github.com/MaxBell10/logisecure-redteam-blueteam) | 📋 Planned | Purple Team · MTTD · 13 MITRE techniques |
+| Repository | Status | Description |
+|---|---|---|
+| [logisecure-ot-network-security](https://github.com/MaxBell10/logisecure-ot-network-security) | 📋 Planned | Purdue Model · VLAN · ACL · IEC 62443 |
+| [logisecure-pki-kms](https://github.com/MaxBell10/logisecure-pki-kms) | 📋 Planned | 2-tier PKI · Root CA offline · CRL · GPG |
+| [logisecure-honeypot-threat-intel](https://github.com/MaxBell10/logisecure-honeypot-threat-intel) | 📋 Planned | Cowrie · STIX IOC export · Threat Intel |
+| [logisecure-container-security](https://github.com/MaxBell10/logisecure-container-security) | 📋 Planned | Docker hardening · Trivy · kube-bench · SBOM |
+| [logisecure-cloud-security](https://github.com/MaxBell10/logisecure-cloud-security) | 📋 Planned | AWS · Terraform IaC · GuardDuty · CloudTrail |
+| [logisecure-forensics-ir](https://github.com/MaxBell10/logisecure-forensics-ir) | 📋 Planned | PICERL · TheHive · memory & disk forensics |
+| [logisecure-redteam-blueteam](https://github.com/MaxBell10/logisecure-redteam-blueteam) | 📋 Planned | Purple Team · MTTD · 13 MITRE techniques |
 
 ### Part 3 — Govern the Risk
 
-| # | Repository | Status | Description |
-|---|---|---|---|
-| P13 | [logisecure-legacy-ot-security](https://github.com/MaxBell10/logisecure-legacy-ot-security) | 📋 Planned | Legacy HMI · virtual patching · risk treatment |
-| P14 | [logisecure-supply-chain-risk](https://github.com/MaxBell10/logisecure-supply-chain-risk) | 📋 Planned | Vendor assessment · SBOM Syft/Grype · MFA VPN |
-| P15 | [logisecure-iso27001-audit](https://github.com/MaxBell10/logisecure-iso27001-audit) | 📋 Planned | SoA · Annex A audit · NC report · action plan |
+| Repository | Status | Description |
+|---|---|---|
+| [logisecure-legacy-ot-security](https://github.com/MaxBell10/logisecure-legacy-ot-security) | 📋 Planned | Legacy HMI · virtual patching · risk treatment |
+| [logisecure-supply-chain-risk](https://github.com/MaxBell10/logisecure-supply-chain-risk) | 📋 Planned | Vendor assessment · SBOM Syft/Grype · MFA VPN |
+| [logisecure-iso27001-audit](https://github.com/MaxBell10/logisecure-iso27001-audit) | 📋 Planned | SoA · Annex A audit · NC report · action plan |
 
 ---
 
@@ -104,51 +105,51 @@ INTERNET/WAN
 
 > **Reading guide:** `Target` = objective defined in the programme · `Actual` = measured value after project completion
 
-| KPI | Target | Actual | Project |
+| KPI | Target | Actual | Repository |
 |---|---|---|---|
-| Purple Team MTTD | < 120s | `TBD after P12` | P12 |
-| MITRE techniques detected | ≥ 11 / 13 tested | `TBD after P12` | P12 |
-| Critical Docker CVEs reduction | > 90% | `TBD after P9` | P9 |
-| Custom Wazuh rules | ≥ 15 | `TBD after P12` | P1, P8, P11, P12 |
-| Network segments | 5 | `TBD after P6` | P2, P6 |
-| Legacy OT risk level | CRITICAL → MEDIUM | `TBD after P13` | P13 |
-| ISO 27001 Annex A controls audited | ≥ 20 | `TBD after P15` | P15 |
-| Major NCs identified | documented | `TBD after P15` | P15 |
-| Suppliers assessed | 3 | `TBD after P14` | P14 |
-| PingCastle AD score improvement | significant reduction | `TBD after P1` | P1 |
-| OpenVAS critical vulns (DC) | 0 after remediation | `TBD after P2` | P2 |
+| Purple Team MTTD | < 120s | `TBD` | logisecure-redteam-blueteam |
+| MITRE techniques detected | ≥ 11 / 13 tested | `TBD` | logisecure-redteam-blueteam |
+| Critical Docker CVEs reduction | > 90% | `TBD` | logisecure-container-security |
+| Custom Wazuh rules | ≥ 15 | `TBD` | multiple |
+| Network segments | 5 | `TBD` | logisecure-pfsense-segmentation |
+| Legacy OT risk level | CRITICAL → MEDIUM | `TBD` | logisecure-legacy-ot-security |
+| ISO 27001 Annex A controls audited | ≥ 20 | `TBD` | logisecure-iso27001-audit |
+| Major NCs identified | documented | `TBD` | logisecure-iso27001-audit |
+| Suppliers assessed | 3 | `TBD` | logisecure-supply-chain-risk |
+| PingCastle AD score improvement | significant reduction | `TBD` | logisecure-active-directory |
+| OpenVAS critical vulns (DC) | 0 after remediation | `TBD` | logisecure-pfsense-segmentation |
 
 ---
 
 ## Security Posture — Executive Summary
 
-| Domain | Maturity | Projects |
+| Domain | Maturity | Repository |
 |---|---|---|
-| Identity & Access Management | `TBD after P1` | P1 — AD + GPO + Wazuh |
-| Network Segmentation | `TBD after P2` | P2 — pfSense + Suricata |
-| Cryptography & PKI | `TBD after P7` | P7 — PKI/KMS Lab |
-| Threat Detection | `TBD after P12` | P1, P8, P12 — Wazuh + Cowrie |
-| Cloud Security | `TBD after P10` | P10 — AWS + Terraform |
-| OT / ICS Security | `TBD after P13` | P6, P13 — Packet Tracer + Legacy |
-| Incident Response | `TBD after P11` | P11 — PICERL + TheHive |
-| Supplier Risk | `TBD after P14` | P14 — Supply Chain + SBOM |
-| GRC & Compliance | `TBD after P15` | P3, P15 — EBIOS RM + ISO 27001 |
-| Security Awareness | Gap identified | P15 — A.6.3 NC majeure |
+| Identity & Access Management | `TBD` | logisecure-active-directory |
+| Network Segmentation | `TBD` | logisecure-pfsense-segmentation |
+| Cryptography & PKI | `TBD` | logisecure-pki-kms |
+| Threat Detection | `TBD` | logisecure-active-directory · logisecure-honeypot-threat-intel |
+| Cloud Security | `TBD` | logisecure-cloud-security |
+| OT / ICS Security | `TBD` | logisecure-ot-network-security · logisecure-legacy-ot-security |
+| Incident Response | `TBD` | logisecure-forensics-ir |
+| Supplier Risk | `TBD` | logisecure-supply-chain-risk |
+| GRC & Compliance | `TBD` | logisecure-ebios-rm-assessment · logisecure-iso27001-audit |
+| Security Awareness | Gap identified | logisecure-iso27001-audit — A.6.3 NC |
 
 ---
 
 ## Risk Register
 
-| Risk | Impact | Likelihood | Mitigation | Project |
+| Risk | Impact | Likelihood | Mitigation | Repository |
 |---|---|---|---|---|
-| AD compromise — password spray | CRITICAL | MEDIUM | Account lockout · Wazuh rule · MFA | P1, P5, P12 |
-| Lateral movement IT → OT | CRITICAL | MEDIUM | VLAN · pfSense ACL · Suricata IPS | P2, P6, P12 |
-| Ransomware via phishing (WMS) | CRITICAL | HIGH | Email filtering · backup · IR playbook | P3, P11 |
-| Unsecured third-party VPN (OT) | HIGH | HIGH | MFA VPN · ACL · session timeout · logs | P14 |
-| API partner data leak | HIGH | MEDIUM | TLS · vendor assessment · SBOM | P14 |
-| Legacy OT unpatched exploit | HIGH | MEDIUM | Virtual patching Suricata · VLAN Zeek | P13 |
-| S3 cloud exfiltration | HIGH | LOW | Public access block · GuardDuty | P10 |
-| Software supply chain compromise | HIGH | LOW | SBOM Syft/Grype · image scanning | P14, P9 |
+| AD compromise — password spray | CRITICAL | MEDIUM | Account lockout · Wazuh rule · MFA | logisecure-active-directory |
+| Lateral movement IT → OT | CRITICAL | MEDIUM | VLAN · pfSense ACL · Suricata IPS | logisecure-pfsense-segmentation |
+| Ransomware via phishing (WMS) | CRITICAL | HIGH | Email filtering · backup · IR playbook | logisecure-ebios-rm-assessment |
+| Unsecured third-party VPN (OT) | HIGH | HIGH | MFA VPN · ACL · session timeout · logs | logisecure-supply-chain-risk |
+| API partner data leak | HIGH | MEDIUM | TLS · vendor assessment · SBOM | logisecure-supply-chain-risk |
+| Legacy OT unpatched exploit | HIGH | MEDIUM | Virtual patching · VLAN · Zeek | logisecure-legacy-ot-security |
+| S3 cloud exfiltration | HIGH | LOW | Public access block · GuardDuty | logisecure-cloud-security |
+| Software supply chain compromise | HIGH | LOW | SBOM Syft/Grype · image scanning | logisecure-container-security |
 
 ---
 
@@ -168,36 +169,35 @@ INTERNET/WAN
 
 ## Flagship Projects
 
-| # | Repository | Why flagship | Key metric |
-|---|---|---|---|
-| P12 | [logisecure-redteam-blueteam](https://github.com/MaxBell10/logisecure-redteam-blueteam) | Purple Team — full system vision | MTTD · 11/13 techniques detected |
-| P15 | [logisecure-iso27001-audit](https://github.com/MaxBell10/logisecure-iso27001-audit) | SoA + audit report — rare GRC profile | 2 major NCs documented |
-| P5 | [logisecure-attack-simulation](https://github.com/MaxBell10/logisecure-attack-simulation) | AD + pfSense + detection + incident report | Complete kill chain |
-| P1 | [logisecure-active-directory](https://github.com/MaxBell10/logisecure-active-directory) | IAM + SIEM foundation — base of everything | PingCastle score before/after |
-| P10 | [logisecure-cloud-security](https://github.com/MaxBell10/logisecure-cloud-security) | Terraform IaC + AWS — highly in demand | GuardDuty + compliance |
+| Repository | Why flagship | Key metric |
+|---|---|---|
+| [logisecure-redteam-blueteam](https://github.com/MaxBell10/logisecure-redteam-blueteam) | Purple Team — full system vision | MTTD · 11/13 techniques detected |
+| [logisecure-iso27001-audit](https://github.com/MaxBell10/logisecure-iso27001-audit) | SoA + audit report — rare GRC profile | 2 major NCs documented |
+| [logisecure-attack-simulation](https://github.com/MaxBell10/logisecure-attack-simulation) | AD + pfSense + detection + incident report | Complete kill chain |
+| [logisecure-active-directory](https://github.com/MaxBell10/logisecure-active-directory) | IAM + SIEM foundation — base of everything | PingCastle score before/after |
+| [logisecure-cloud-security](https://github.com/MaxBell10/logisecure-cloud-security) | Terraform IaC + AWS — highly in demand | GuardDuty + compliance |
 
 ---
 
 ## Certification Coverage
 
-| Project | Security+ | CCNA | SecOT+ | CISSP |
+| Repository | Security+ | CCNA | SecOT+ | CISSP |
 |---|---|---|---|---|
-| P0 Hub | — | — | — | D1 |
-| P1 AD | IAM, SIEM | — | — | D5 |
-| P2 pfSense | Network | ACL, VLAN | — | D4 |
-| P3 EBIOS | Risk | — | Risk OT | D1 |
-| P4 Bash | Automation | — | — | D7 |
-| P5 Attack | Threats | Routing | — | D7 |
-| P6 OT | ICS/SCADA | VLANs | OT Net | D7 |
-| P7 PKI | Crypto | — | — | D3 |
-| P8 Honeypot | Threat Intel | — | — | D7 |
-| P9 Docker | Virtualisation | — | — | D7 |
-| P10 Cloud | Cloud Sec | — | — | D3/D7 |
-| P11 Forensics | IR | — | — | D7 |
-| P12 Red/Blue | Pentest | CCNA | OT threats | D7 |
-| P13 Legacy OT | ICS | — | Legacy | D7 |
-| P14 Supply Chain | Supply | — | OT vendors | D1 |
-| P15 ISO 27001 | Risk Mgmt | — | — | D1 |
+| logisecure-active-directory | IAM, SIEM | — | — | D5 |
+| logisecure-pfsense-segmentation | Network | ACL, VLAN | — | D4 |
+| logisecure-ebios-rm-assessment | Risk | — | Risk OT | D1 |
+| logisecure-bash-automation | Automation | — | — | D7 |
+| logisecure-attack-simulation | Threats | Routing | — | D7 |
+| logisecure-ot-network-security | ICS/SCADA | VLANs | OT Net | D7 |
+| logisecure-pki-kms | Crypto | — | — | D3 |
+| logisecure-honeypot-threat-intel | Threat Intel | — | — | D7 |
+| logisecure-container-security | Virtualisation | — | — | D7 |
+| logisecure-cloud-security | Cloud Sec | — | — | D3/D7 |
+| logisecure-forensics-ir | IR | — | — | D7 |
+| logisecure-redteam-blueteam | Pentest | CCNA | OT threats | D7 |
+| logisecure-legacy-ot-security | ICS | — | Legacy | D7 |
+| logisecure-supply-chain-risk | Supply | — | OT vendors | D1 |
+| logisecure-iso27001-audit | Risk Mgmt | — | — | D1 |
 
 ---
 
