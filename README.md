@@ -26,6 +26,20 @@
 
 ---
 
+## ⭐ Flagship Projects — Start Here
+
+> These 5 repositories represent the core of the programme. Each one demonstrates a measurable security outcome.
+
+| Repository | What it demonstrates | Key metric |
+|---|---|---|
+| [logisecure-active-directory](https://github.com/MaxBell10/logisecure-active-directory) | IAM + SIEM foundation — base of everything | PingCastle 55/100 · Privileged Accounts -10pts · 3 MITRE rules |
+| [logisecure-redteam-blueteam](https://github.com/MaxBell10/logisecure-redteam-blueteam) | Purple Team — full system vision | MTTD · 11/13 MITRE techniques detected |
+| [logisecure-attack-simulation](https://github.com/MaxBell10/logisecure-attack-simulation) | AD + pfSense + detection + incident report | Complete kill chain documented |
+| [logisecure-iso27001-audit](https://github.com/MaxBell10/logisecure-iso27001-audit) | SoA + audit report — rare GRC profile | 2 major NCs documented |
+| [logisecure-cloud-security](https://github.com/MaxBell10/logisecure-cloud-security) | Terraform IaC + AWS — highly in demand | GuardDuty + compliance |
+
+---
+
 ## Global Architecture
 
 ```
@@ -35,12 +49,14 @@ INTERNET/WAN
     │
 [pfSense CE — Firewall/Router]              → logisecure-pfsense-segmentation
     │
-    ├── [LAN IT — 192.168.1.x]
+    ├── [LAN IT — 10.10.10.x]
     │       Active Directory (lab.local)    → logisecure-active-directory
-    │       Wazuh SIEM                      → logisecure-active-directory
+    │       DC01: 10.10.10.10               → logisecure-active-directory
+    │       WKS01: 10.10.10.20              → logisecure-active-directory
+    │       Wazuh SIEM: 10.10.10.30         → logisecure-active-directory
     │       PKI / KMS                       → logisecure-pki-kms
     │
-    ├── [DMZ — 192.168.2.x]
+    ├── [DMZ — 10.10.20.x]
     │       Cowrie Honeypot                 → logisecure-honeypot-threat-intel
     │       Web server (supplier-facing)    → logisecure-honeypot-threat-intel
     │
@@ -58,6 +74,8 @@ INTERNET/WAN
     TechLogix · ConveyorPro · DataAPI
 ```
 
+> **Architecture note:** The current design follows a perimeter-based model (pfSense zones, Purdue Model for OT). The planned evolution towards Zero Trust — micro-segmentation, continuous AD identity validation, and conditional access — is documented in the improvement roadmap of [logisecure-pfsense-segmentation](https://github.com/MaxBell10/logisecure-pfsense-segmentation).
+
 ---
 
 ## Programme Overview
@@ -73,7 +91,7 @@ INTERNET/WAN
 
 | Repository | Status | Description |
 |---|---|---|
-| [logisecure-active-directory](https://github.com/MaxBell10/logisecure-active-directory) | 🔄 In progress | AD hardening · GPO · Wazuh SIEM · MITRE ATT&CK |
+| [logisecure-active-directory](https://github.com/MaxBell10/logisecure-active-directory) | ✅ Completed | AD hardening · 4 GPOs · Wazuh SIEM · 3 MITRE ATT&CK rules · PingCastle 55/100 |
 | [logisecure-pfsense-segmentation](https://github.com/MaxBell10/logisecure-pfsense-segmentation) | 🔄 In progress | pfSense · Suricata IDS/IPS · DMZ · OpenVAS |
 | [logisecure-ebios-rm-assessment](https://github.com/MaxBell10/logisecure-ebios-rm-assessment) | 📋 Planned | EBIOS RM 5 workshops · NIS2 · strategic scenarios |
 | [logisecure-bash-automation](https://github.com/MaxBell10/logisecure-bash-automation) | 📋 Planned | Bash & PowerShell · GPG-signed · GitHub Actions CI |
@@ -110,13 +128,13 @@ INTERNET/WAN
 | Purple Team MTTD | < 120s | `TBD` | logisecure-redteam-blueteam |
 | MITRE techniques detected | ≥ 11 / 13 tested | `TBD` | logisecure-redteam-blueteam |
 | Critical Docker CVEs reduction | > 90% | `TBD` | logisecure-container-security |
-| Custom Wazuh rules | ≥ 15 | `TBD` | multiple |
+| Custom Wazuh rules | ≥ 15 | **3 / 15** ✅ (T1110, T1078, T1087) | logisecure-active-directory |
 | Network segments | 5 | `TBD` | logisecure-pfsense-segmentation |
 | Legacy OT risk level | CRITICAL → MEDIUM | `TBD` | logisecure-legacy-ot-security |
 | ISO 27001 Annex A controls audited | ≥ 20 | `TBD` | logisecure-iso27001-audit |
 | Major NCs identified | documented | `TBD` | logisecure-iso27001-audit |
 | Suppliers assessed | 3 | `TBD` | logisecure-supply-chain-risk |
-| PingCastle AD score improvement | significant reduction | `TBD` | logisecure-active-directory |
+| PingCastle AD score | significant reduction | **55/100** · Privileged Accounts -10pts · Stale Objects -5pts | logisecure-active-directory |
 | OpenVAS critical vulns (DC) | 0 after remediation | `TBD` | logisecure-pfsense-segmentation |
 
 ---
@@ -125,10 +143,10 @@ INTERNET/WAN
 
 | Domain | Maturity | Repository |
 |---|---|---|
-| Identity & Access Management | `TBD` | logisecure-active-directory |
+| Identity & Access Management | **Established** — AD hardened · 4 GPOs · 6 users · MachineAccountQuota=0 · Recycle Bin · AES256 | logisecure-active-directory |
 | Network Segmentation | `TBD` | logisecure-pfsense-segmentation |
 | Cryptography & PKI | `TBD` | logisecure-pki-kms |
-| Threat Detection | `TBD` | logisecure-active-directory · logisecure-honeypot-threat-intel |
+| Threat Detection | **Initial** — Wazuh v4.14.5 · 2 agents · 3 MITRE rules · baseline alerting | logisecure-active-directory · logisecure-honeypot-threat-intel |
 | Cloud Security | `TBD` | logisecure-cloud-security |
 | OT / ICS Security | `TBD` | logisecure-ot-network-security · logisecure-legacy-ot-security |
 | Incident Response | `TBD` | logisecure-forensics-ir |
@@ -138,66 +156,32 @@ INTERNET/WAN
 
 ---
 
-## Risk Register
+## Risk Register — Top Risks
 
-| Risk | Impact | Likelihood | Mitigation | Repository |
-|---|---|---|---|---|
-| AD compromise — password spray | CRITICAL | MEDIUM | Account lockout · Wazuh rule · MFA | logisecure-active-directory |
-| Lateral movement IT → OT | CRITICAL | MEDIUM | VLAN · pfSense ACL · Suricata IPS | logisecure-pfsense-segmentation |
-| Ransomware via phishing (WMS) | CRITICAL | HIGH | Email filtering · backup · IR playbook | logisecure-ebios-rm-assessment |
-| Unsecured third-party VPN (OT) | HIGH | HIGH | MFA VPN · ACL · session timeout · logs | logisecure-supply-chain-risk |
-| API partner data leak | HIGH | MEDIUM | TLS · vendor assessment · SBOM | logisecure-supply-chain-risk |
-| Legacy OT unpatched exploit | HIGH | MEDIUM | Virtual patching · VLAN · Zeek | logisecure-legacy-ot-security |
-| S3 cloud exfiltration | HIGH | LOW | Public access block · GuardDuty | logisecure-cloud-security |
-| Software supply chain compromise | HIGH | LOW | SBOM Syft/Grype · image scanning | logisecure-container-security |
+| Risk | Impact | Likelihood | Mitigation |
+|---|---|---|---|
+| AD compromise — password spray | CRITICAL | MEDIUM | Account lockout · Wazuh rule T1110 · MFA |
+| Lateral movement IT → OT | CRITICAL | MEDIUM | VLAN · pfSense ACL · Suricata IPS |
+| Ransomware via phishing (WMS) | CRITICAL | HIGH | Email filtering · backup · IR playbook |
+| Unsecured third-party VPN (OT) | HIGH | HIGH | MFA VPN · ACL · session timeout · logs |
+
+> Full risk register (8 risks · EBIOS RM mapped) → [`docs/risk-register.md`](docs/risk-register.md)
 
 ---
 
 ## Regulatory & Framework Coverage
 
-| Framework | Coverage |
-|---|---|
-| **ISO 27001:2022** | Annex A — A.5 Policies · A.6 People · A.7 Physical · A.8 Technological |
-| **NIS2 Art. 21** | Risk management · Supply chain · Access control · Incident handling · Continuity |
-| **IEC 62443** | SL1–SL2 · SR 1.1–1.3 · SR 5.1–5.4 · Purdue Model · IT/OT segmentation |
-| **EBIOS RM** | 5 workshops · Strategic & operational scenarios · Residual risk treatment |
-| **MITRE ATT&CK Enterprise** | T1078 · T1110 · T1484 · T1566 · T1195 · T1562 · T1021 · T1133 |
-| **MITRE ATT&CK for ICS** | T0862 · T0859 · T0814 · T0813 · T0849 · T0822 |
-| **CIS Controls** | Control 5 — Account Mgmt · Control 8 — Audit Logs · Control 12 — Network Infra |
+The programme covers **ISO 27001:2022** (Annex A), **NIS2 Art. 21**, **IEC 62443** (SL1–SL2, Purdue Model), **EBIOS RM** (5 workshops), **MITRE ATT&CK** Enterprise + ICS, and **CIS Controls** (5, 8, 12).
 
----
-
-## Flagship Projects
-
-| Repository | Why flagship | Key metric |
-|---|---|---|
-| [logisecure-redteam-blueteam](https://github.com/MaxBell10/logisecure-redteam-blueteam) | Purple Team — full system vision | MTTD · 11/13 techniques detected |
-| [logisecure-iso27001-audit](https://github.com/MaxBell10/logisecure-iso27001-audit) | SoA + audit report — rare GRC profile | 2 major NCs documented |
-| [logisecure-attack-simulation](https://github.com/MaxBell10/logisecure-attack-simulation) | AD + pfSense + detection + incident report | Complete kill chain |
-| [logisecure-active-directory](https://github.com/MaxBell10/logisecure-active-directory) | IAM + SIEM foundation — base of everything | PingCastle score before/after |
-| [logisecure-cloud-security](https://github.com/MaxBell10/logisecure-cloud-security) | Terraform IaC + AWS — highly in demand | GuardDuty + compliance |
+> Full framework mapping → [`docs/framework-coverage.md`](docs/framework-coverage.md)
 
 ---
 
 ## Certification Coverage
 
-| Repository | Security+ | CCNA | SecOT+ | CISSP |
-|---|---|---|---|---|
-| logisecure-active-directory | IAM, SIEM | — | — | D5 |
-| logisecure-pfsense-segmentation | Network | ACL, VLAN | — | D4 |
-| logisecure-ebios-rm-assessment | Risk | — | Risk OT | D1 |
-| logisecure-bash-automation | Automation | — | — | D7 |
-| logisecure-attack-simulation | Threats | Routing | — | D7 |
-| logisecure-ot-network-security | ICS/SCADA | VLANs | OT Net | D7 |
-| logisecure-pki-kms | Crypto | — | — | D3 |
-| logisecure-honeypot-threat-intel | Threat Intel | — | — | D7 |
-| logisecure-container-security | Virtualisation | — | — | D7 |
-| logisecure-cloud-security | Cloud Sec | — | — | D3/D7 |
-| logisecure-forensics-ir | IR | — | — | D7 |
-| logisecure-redteam-blueteam | Pentest | CCNA | OT threats | D7 |
-| logisecure-legacy-ot-security | ICS | — | Legacy | D7 |
-| logisecure-supply-chain-risk | Supply | — | OT vendors | D1 |
-| logisecure-iso27001-audit | Risk Mgmt | — | — | D1 |
+Each repository contributes to at least one certification domain: **Security+**, **CCNA**, **CISSP** (D1–D7). Flagship projects cover the broadest range across all four.
+
+> Full certification mapping per repository → [`docs/certification-coverage.md`](docs/certification-coverage.md)
 
 ---
 
