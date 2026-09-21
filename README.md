@@ -28,15 +28,21 @@
 
 ## ⭐ Flagship Projects — Start Here
 
-> These 5 repositories represent the core of the programme. Each one demonstrates a measurable security outcome.
+> Start with the completed repositories — each one demonstrates a measurable, evidenced security outcome. The planned flagships follow with their target outcome, and will be linked once published.
 
 | Repository | What it demonstrates | Key metric |
 |---|---|---|
 | [logisecure-active-directory](https://github.com/MaxBell10/logisecure-active-directory) | IAM + SIEM foundation — base of everything | PingCastle 55/100 · Privileged Accounts -10pts · 3 MITRE rules |
-| [logisecure-redteam-blueteam](https://github.com/MaxBell10/logisecure-redteam-blueteam) | Purple Team — full system vision | MTTD · 11/13 MITRE techniques detected |
-| [logisecure-attack-simulation](https://github.com/MaxBell10/logisecure-attack-simulation) | AD + pfSense + detection + incident report | Complete kill chain documented |
-| [logisecure-iso27001-audit](https://github.com/MaxBell10/logisecure-iso27001-audit) | SoA + audit report — rare GRC profile | 2 major NCs documented |
-| [logisecure-cloud-security](https://github.com/MaxBell10/logisecure-cloud-security) | Terraform IaC + AWS — highly in demand | GuardDuty + compliance |
+| [logisecure-pfsense-segmentation](https://github.com/MaxBell10/logisecure-pfsense-segmentation) | Network segmentation + detection wired into the SIEM | 12 rules, default-deny · DMZ→LAN scans alerted in Wazuh (T1046) · vulnerability scanner validated against nmap |
+
+**Planned flagships**
+
+| Repository | What it will demonstrate | Target outcome |
+|---|---|---|
+| logisecure-redteam-blueteam | Purple Team — full system vision | MTTD < 120s · ≥ 11/13 MITRE techniques detected |
+| logisecure-attack-simulation | AD + pfSense + detection + incident report | Complete kill chain documented |
+| logisecure-iso27001-audit | SoA + audit report — rare GRC profile | ≥ 20 Annex A controls audited · NCs documented |
+| logisecure-cloud-security | Terraform IaC + AWS — highly in demand | GuardDuty + compliance |
 
 ---
 
@@ -87,35 +93,37 @@ INTERNET/WAN
 | 2 | Expand the Skills | ot-network-security → redteam-blueteam |
 | 3 | Govern the Risk | legacy-ot-security → iso27001-audit |
 
+> Planned projects are listed by name and linked once their repository is published.
+
 ### Part 1 — Build the Lab
 
 | Repository | Status | Description |
 |---|---|---|
 | [logisecure-active-directory](https://github.com/MaxBell10/logisecure-active-directory) | ✅ Completed | AD hardening · 4 GPOs · Wazuh SIEM · 3 MITRE ATT&CK rules · PingCastle 55/100 |
-| [logisecure-pfsense-segmentation](https://github.com/MaxBell10/logisecure-pfsense-segmentation) | 🔄 In progress | pfSense · Suricata IDS/IPS · DMZ · OpenVAS |
-| [logisecure-ebios-rm-assessment](https://github.com/MaxBell10/logisecure-ebios-rm-assessment) | 📋 Planned | EBIOS RM 5 workshops · NIS2 · strategic scenarios |
-| [logisecure-bash-automation](https://github.com/MaxBell10/logisecure-bash-automation) | 📋 Planned | Bash & PowerShell · GPG-signed · GitHub Actions CI |
-| [logisecure-attack-simulation](https://github.com/MaxBell10/logisecure-attack-simulation) | 📋 Planned | Kill chain · password spray · Wazuh correlation |
+| [logisecure-pfsense-segmentation](https://github.com/MaxBell10/logisecure-pfsense-segmentation) | ✅ Completed | LAN · DMZ segmentation · 12 rules, default-deny · Suricata IDS/IPS ×3 · alerts in Wazuh · MITRE T1046 · OpenVAS validated against nmap |
+| logisecure-ebios-rm-assessment | 📋 Planned | EBIOS RM 5 workshops · NIS2 · strategic scenarios |
+| logisecure-bash-automation | 📋 Planned | Bash & PowerShell · GPG-signed · GitHub Actions CI |
+| logisecure-attack-simulation | 📋 Planned | Kill chain · password spray · Wazuh correlation |
 
 ### Part 2 — Expand the Skills
 
 | Repository | Status | Description |
 |---|---|---|
-| [logisecure-ot-network-security](https://github.com/MaxBell10/logisecure-ot-network-security) | 📋 Planned | Purdue Model · VLAN · ACL · IEC 62443 |
-| [logisecure-pki-kms](https://github.com/MaxBell10/logisecure-pki-kms) | 📋 Planned | 2-tier PKI · Root CA offline · CRL · GPG |
-| [logisecure-honeypot-threat-intel](https://github.com/MaxBell10/logisecure-honeypot-threat-intel) | 📋 Planned | Cowrie · STIX IOC export · Threat Intel |
-| [logisecure-container-security](https://github.com/MaxBell10/logisecure-container-security) | 📋 Planned | Docker hardening · Trivy · kube-bench · SBOM |
-| [logisecure-cloud-security](https://github.com/MaxBell10/logisecure-cloud-security) | 📋 Planned | AWS · Terraform IaC · GuardDuty · CloudTrail |
-| [logisecure-forensics-ir](https://github.com/MaxBell10/logisecure-forensics-ir) | 📋 Planned | PICERL · TheHive · memory & disk forensics |
-| [logisecure-redteam-blueteam](https://github.com/MaxBell10/logisecure-redteam-blueteam) | 📋 Planned | Purple Team · MTTD · 13 MITRE techniques |
+| logisecure-ot-network-security | 📋 Planned | Purdue Model · VLAN · ACL · IEC 62443 |
+| logisecure-pki-kms | 📋 Planned | 2-tier PKI · Root CA offline · CRL · GPG |
+| logisecure-honeypot-threat-intel | 📋 Planned | Cowrie · STIX IOC export · Threat Intel |
+| logisecure-container-security | 📋 Planned | Docker hardening · Trivy · kube-bench · SBOM |
+| logisecure-cloud-security | 📋 Planned | AWS · Terraform IaC · GuardDuty · CloudTrail |
+| logisecure-forensics-ir | 📋 Planned | PICERL · TheHive · memory & disk forensics |
+| logisecure-redteam-blueteam | 📋 Planned | Purple Team · MTTD · 13 MITRE techniques |
 
 ### Part 3 — Govern the Risk
 
 | Repository | Status | Description |
 |---|---|---|
-| [logisecure-legacy-ot-security](https://github.com/MaxBell10/logisecure-legacy-ot-security) | 📋 Planned | Legacy HMI · virtual patching · risk treatment |
-| [logisecure-supply-chain-risk](https://github.com/MaxBell10/logisecure-supply-chain-risk) | 📋 Planned | Vendor assessment · SBOM Syft/Grype · MFA VPN |
-| [logisecure-iso27001-audit](https://github.com/MaxBell10/logisecure-iso27001-audit) | 📋 Planned | SoA · Annex A audit · NC report · action plan |
+| logisecure-legacy-ot-security | 📋 Planned | Legacy HMI · virtual patching · risk treatment |
+| logisecure-supply-chain-risk | 📋 Planned | Vendor assessment · SBOM Syft/Grype · MFA VPN |
+| logisecure-iso27001-audit | 📋 Planned | SoA · Annex A audit · NC report · action plan |
 
 ---
 
@@ -129,13 +137,13 @@ INTERNET/WAN
 | MITRE techniques detected | ≥ 11 / 13 tested | `TBD` | logisecure-redteam-blueteam |
 | Critical Docker CVEs reduction | > 90% | `TBD` | logisecure-container-security |
 | Custom Wazuh rules | ≥ 15 | **3 / 15** ✅ (T1110, T1078, T1087) | logisecure-active-directory |
-| Network segments | 5 | `TBD` | logisecure-pfsense-segmentation |
+| Network segments | 5 | **2 / 5** — LAN · DMZ | logisecure-pfsense-segmentation · logisecure-ot-network-security · logisecure-cloud-security |
 | Legacy OT risk level | CRITICAL → MEDIUM | `TBD` | logisecure-legacy-ot-security |
 | ISO 27001 Annex A controls audited | ≥ 20 | `TBD` | logisecure-iso27001-audit |
 | Major NCs identified | documented | `TBD` | logisecure-iso27001-audit |
 | Suppliers assessed | 3 | `TBD` | logisecure-supply-chain-risk |
 | PingCastle AD score | significant reduction | **55/100** · Privileged Accounts -10pts · Stale Objects -5pts | logisecure-active-directory |
-| OpenVAS critical vulns (DC) | 0 after remediation | `TBD` | logisecure-pfsense-segmentation |
+| OpenVAS critical vulns (DC) | 0 after remediation | 0 Critical · 0 High (unauthenticated scan) — authenticated scan + remediation carried over ⚠️ | logisecure-pfsense-segmentation |
 
 ---
 
@@ -144,9 +152,9 @@ INTERNET/WAN
 | Domain | Maturity | Repository |
 |---|---|---|
 | Identity & Access Management | **Established** — AD hardened · 4 GPOs · 6 users · MachineAccountQuota=0 · Recycle Bin · AES256 | logisecure-active-directory |
-| Network Segmentation | `TBD` | logisecure-pfsense-segmentation |
+| Network Segmentation | **Established** — LAN · DMZ behind pfSense · 12 justified rules, default-deny · DMZ→LAN blocked and logged · LAN still flat (no micro-segmentation) | logisecure-pfsense-segmentation |
 | Cryptography & PKI | `TBD` | logisecure-pki-kms |
-| Threat Detection | **Initial** — Wazuh v4.14.5 · 2 agents · 3 MITRE rules · baseline alerting | logisecure-active-directory · logisecure-honeypot-threat-intel |
+| Threat Detection | **Initial** — Wazuh v4.14.5 · 2 agents + Suricata DMZ sensor (syslog) · 3 MITRE rules (AD) + T1046 (network scans) · baseline alerting | logisecure-active-directory · logisecure-pfsense-segmentation · logisecure-honeypot-threat-intel |
 | Cloud Security | `TBD` | logisecure-cloud-security |
 | OT / ICS Security | `TBD` | logisecure-ot-network-security · logisecure-legacy-ot-security |
 | Incident Response | `TBD` | logisecure-forensics-ir |
