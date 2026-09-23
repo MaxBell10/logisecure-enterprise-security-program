@@ -80,7 +80,7 @@ INTERNET/WAN
     TechLogix · ConveyorPro · DataAPI
 ```
 
-> **Architecture note:** The current design follows a perimeter-based model (pfSense zones, Purdue Model for OT). The planned evolution towards Zero Trust — micro-segmentation, continuous AD identity validation, and conditional access — is documented in the improvement roadmap of [logisecure-pfsense-segmentation](https://github.com/MaxBell10/logisecure-pfsense-segmentation).
+> **Architecture note:** The current design follows a perimeter-based model (pfSense zones, Purdue Model for OT). The planned evolution towards Zero Trust — micro-segmentation, continuous AD identity validation, and conditional access — is part of the programme roadmap. The limits it addresses — a flat LAN, and a gateway IDS blind to intra-segment traffic — are documented in [logisecure-pfsense-segmentation](https://github.com/MaxBell10/logisecure-pfsense-segmentation).
 
 ---
 
@@ -136,7 +136,7 @@ INTERNET/WAN
 | Purple Team MTTD | < 120s | `TBD` | logisecure-redteam-blueteam |
 | MITRE techniques detected | ≥ 11 / 13 tested | `TBD` | logisecure-redteam-blueteam |
 | Critical Docker CVEs reduction | > 90% | `TBD` | logisecure-container-security |
-| Custom Wazuh rules | ≥ 15 | **3 / 15** ✅ (T1110, T1078, T1087) | logisecure-active-directory |
+| Custom Wazuh rules | ≥ 15 | **5 / 15** ✅ (T1110, T1078, T1087 · T1046 + Suricata alerts) | logisecure-active-directory · logisecure-pfsense-segmentation |
 | Network segments | 5 | **2 / 5** — LAN · DMZ | logisecure-pfsense-segmentation · logisecure-ot-network-security · logisecure-cloud-security |
 | Legacy OT risk level | CRITICAL → MEDIUM | `TBD` | logisecure-legacy-ot-security |
 | ISO 27001 Annex A controls audited | ≥ 20 | `TBD` | logisecure-iso27001-audit |
@@ -160,7 +160,7 @@ INTERNET/WAN
 | Incident Response | `TBD` | logisecure-forensics-ir |
 | Supplier Risk | `TBD` | logisecure-supply-chain-risk |
 | GRC & Compliance | `TBD` | logisecure-ebios-rm-assessment · logisecure-iso27001-audit |
-| Security Awareness | Gap identified | logisecure-iso27001-audit — A.6.3 NC |
+| Security Awareness | `TBD` | logisecure-iso27001-audit |
 
 ---
 
@@ -173,23 +173,17 @@ INTERNET/WAN
 | Ransomware via phishing (WMS) | CRITICAL | HIGH | Email filtering · backup · IR playbook |
 | Unsecured third-party VPN (OT) | HIGH | HIGH | MFA VPN · ACL · session timeout · logs |
 
-> Full risk register (8 risks · EBIOS RM mapped) → [`docs/risk-register.md`](docs/risk-register.md)
-
 ---
 
 ## Regulatory & Framework Coverage
 
 The programme covers **ISO 27001:2022** (Annex A), **NIS2 Art. 21**, **IEC 62443** (SL1–SL2, Purdue Model), **EBIOS RM** (5 workshops), **MITRE ATT&CK** Enterprise + ICS, and **CIS Controls** (5, 8, 12).
 
-> Full framework mapping → [`docs/framework-coverage.md`](docs/framework-coverage.md)
-
 ---
 
 ## Certification Coverage
 
-Each repository contributes to at least one certification domain: **Security+**, **CCNA**, **CISSP** (D1–D7). Flagship projects cover the broadest range across all four.
-
-> Full certification mapping per repository → [`docs/certification-coverage.md`](docs/certification-coverage.md)
+Each repository contributes to at least one certification domain: **Security+**, **CCNA**, **CISSP** (D1–D7). Flagship projects cover the broadest range across all three.
 
 ---
 
